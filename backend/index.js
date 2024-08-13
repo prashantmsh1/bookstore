@@ -4,12 +4,14 @@ import mongoose, { mongo } from "mongoose";
 import { MONGO_URI } from "./config.js";
 import { Book } from "./models/bookModal.js";
 import booksRoute from "./routes/booksRoute.js";
+import dotenv from "dotenv";
 import cors from "cors";
 const app = express();
+dotenv.config();
 app.use(express.json());
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: "https://bookstore-sigma-two.vercel.app/",
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
     })
@@ -25,7 +27,7 @@ mongoose
     .then((result) => {
         console.log("Connected to MongoDB");
         app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
+            console.log(`Server is running on port ${process.env.MONGO_URI}`);
         });
     })
     .catch((err) => {

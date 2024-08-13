@@ -9,11 +9,11 @@ import { useState, useEffect } from "react";
 const Home = () => {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    console.log(import.meta.env.VITE_BACKEND_URL);
     useEffect(() => {
         setLoading(true);
         axios
-            .get("http://localhost:5000/books")
+            .get(import.meta.env.VITE_BACKEND_URL + "/books")
             .then((response) => {
                 setBooks(response.data.books);
                 console.log(response.data.books);
@@ -39,32 +39,22 @@ const Home = () => {
                 <table className="w-full ">
                     <thead>
                         <tr className=" gap-x-2">
-                            <th className="mx-2 border rounded-md border-slate-600">
-                                No
-                            </th>
-                            <th className="border rounded-md border-slate-600">
-                                Title
-                            </th>
+                            <th className="mx-2 border rounded-md border-slate-600">No</th>
+                            <th className="border rounded-md border-slate-600">Title</th>
                             <th className="border rounded-md border-slate-600 max-md:hidden">
                                 Author
                             </th>
                             <th className="border rounded-md border-slate-600 max-md:hidden">
                                 Publish Year
                             </th>
-                            <th className="border rounded-md border-slate-600">
-                                Operations
-                            </th>
+                            <th className="border rounded-md border-slate-600">Operations</th>
                         </tr>
                     </thead>
                     <tbody>
                         {books.map((book, index) => (
                             <tr className="*:text-center" key={book._id}>
-                                <td className="border rounded-md border-slate-600">
-                                    {index + 1}
-                                </td>
-                                <td className="border rounded-md border-slate-600">
-                                    {book.title}
-                                </td>
+                                <td className="border rounded-md border-slate-600">{index + 1}</td>
+                                <td className="border rounded-md border-slate-600">{book.title}</td>
                                 <td className="border rounded-md border-slate-600 max-md:hidden">
                                     {book.author}
                                 </td>

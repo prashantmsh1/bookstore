@@ -15,7 +15,7 @@ const EditBook = () => {
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:5000/books/${id}`)
+            .get(import.meta.env.VITE_BACKEND_URL + `/books/${id}`)
             .then((response) => {
                 setTitle(response.data.title);
                 setAuthor(response.data.author);
@@ -36,7 +36,7 @@ const EditBook = () => {
             publishYear,
         };
         axios
-            .put(`http://localhost:5000/books/${id}`, data)
+            .put(import.meta.env.VITE_BACKEND_URL + `/books/${id}`, data)
             .then(() => {
                 setLoading(false);
                 navigate("/");

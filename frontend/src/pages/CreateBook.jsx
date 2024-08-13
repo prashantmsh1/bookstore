@@ -19,7 +19,7 @@ const CreateBook = () => {
             publishYear,
         };
         axios
-            .post("http://localhost:5000/books", data)
+            .post(import.meta.env.VITE_BACKEND_URL + "/books", data)
             .then(() => {
                 setLoading(false);
                 navigate("/");
